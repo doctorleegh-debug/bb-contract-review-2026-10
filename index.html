@@ -7,30 +7,46 @@
 <title>뷰티블라썸의원 인플루언서 계약서 수정 제안 (2026-10-26)</title>
 <style>
   :root {
+    --bg:#0f1115; --card:#171a21; --ink:#e6e8ec; --muted:#9aa3b2; --line:#2a2f3a;
+    --soft:#1e222b; --soft2:#232833;
+    --old:#2e2a12; --old-ink:#ffe08a; --old-head:#3d3814;
+    --new:#331b1f; --new-ink:#ffb3b8; --new-head:#45232a;
+    --crit:#ef5350; --major:#f5a524; --minor:#3ccf7a; --link:#7aa7ff;
+    --chip:#232833; --chip-crit-bg:#3a1d1d; --chip-major-bg:#3a2d12; --chip-minor-bg:#143322;
+    --chip-major-ink:#ffcf7a; --chip-minor-ink:#8ff0b4;
+  }
+  [data-theme="light"] {
     --bg:#f6f7f9; --card:#ffffff; --ink:#1f2328; --muted:#6b7280; --line:#e5e7eb;
-    --old:#fff3b0; --old-ink:#5b4a00; --new:#f9d0d0; --new-ink:#5a1414;
+    --soft:#f8f9fb; --soft2:#fafafa;
+    --old:#fff3b0; --old-ink:#5b4a00; --old-head:#ffe88a;
+    --new:#f9d0d0; --new-ink:#5a1414; --new-head:#f4b8b8;
     --crit:#d92d20; --major:#e9890c; --minor:#2e9e5b; --link:#1a56db;
+    --chip:#f1f3f5; --chip-crit-bg:#fde8e6; --chip-major-bg:#fff1dc; --chip-minor-bg:#e6f6ec;
+    --chip-major-ink:#9a5a00; --chip-minor-ink:#1f6b3d;
   }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--bg); color:var(--ink); font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif; font-size:14px; line-height:1.55; }
   a { color:var(--link); word-break:break-all; }
   .wrap { max-width:1180px; margin:0 auto; padding:24px 20px 60px; }
   .top { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:22px 24px; margin-bottom:18px; }
+  .top-row { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
   .top h1 { margin:0 0 6px; font-size:22px; }
   .top .sub { color:var(--muted); margin:0 0 14px; }
+  .theme-btn { flex:none; padding:8px 12px; border-radius:8px; border:1px solid var(--line); background:var(--soft); color:var(--ink); cursor:pointer; font-size:13px; }
   .btns { display:flex; flex-wrap:wrap; gap:10px; }
-  .btn { display:inline-flex; align-items:center; gap:6px; padding:10px 16px; border-radius:8px; text-decoration:none; font-weight:600; border:1px solid var(--line); background:#fff; color:var(--ink); }
-  .btn.primary { background:var(--link); border-color:var(--link); color:#fff; }
-  .btn:hover { filter:brightness(0.96); }
+  .btn { display:inline-flex; align-items:center; gap:6px; padding:10px 16px; border-radius:8px; text-decoration:none; font-weight:600; border:1px solid var(--line); background:var(--soft); color:var(--ink); }
+  .btn.primary { background:var(--link); border-color:var(--link); color:#0b1020; }
+  [data-theme="light"] .btn.primary { color:#fff; }
+  .btn:hover { filter:brightness(1.08); }
   .stats { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
-  .chip { padding:6px 12px; border-radius:999px; font-weight:600; font-size:13px; background:#f1f3f5; }
-  .chip.crit { background:#fde8e6; color:var(--crit); }
-  .chip.major { background:#fff1dc; color:#9a5a00; }
-  .chip.minor { background:#e6f6ec; color:#1f6b3d; }
+  .chip { padding:6px 12px; border-radius:999px; font-weight:600; font-size:13px; background:var(--chip); color:var(--ink); }
+  .chip.crit { background:var(--chip-crit-bg); color:var(--crit); }
+  .chip.major { background:var(--chip-major-bg); color:var(--chip-major-ink); }
+  .chip.minor { background:var(--chip-minor-bg); color:var(--chip-minor-ink); }
   .legend { display:flex; flex-wrap:wrap; gap:14px; margin-top:12px; color:var(--muted); font-size:13px; }
   .legend span::before { content:""; display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:6px; vertical-align:-1px; }
-  .legend .l-old::before { background:var(--old); border:1px solid #e4d27a; }
-  .legend .l-new::before { background:var(--new); border:1px solid #e6a4a4; }
+  .legend .l-old::before { background:var(--old-head); border:1px solid var(--old-ink); }
+  .legend .l-new::before { background:var(--new-head); border:1px solid var(--new-ink); }
   .group { margin-top:28px; }
   .group-title { font-size:18px; margin:0 0 4px; padding-left:10px; border-left:4px solid var(--link); }
   .group-count { font-size:13px; color:var(--muted); font-weight:500; margin-left:6px; }
@@ -40,38 +56,44 @@
   .card.major { border-left-color:var(--major); }
   .card.minor { border-left-color:var(--minor); }
   .card-head { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-  .no { display:inline-flex; width:28px; height:28px; border-radius:50%; background:#eef0f3; align-items:center; justify-content:center; font-weight:700; font-size:13px; }
-  .badge { padding:3px 10px; border-radius:999px; font-size:12px; font-weight:700; color:#fff; }
+  .no { display:inline-flex; width:28px; height:28px; border-radius:50%; background:var(--soft2); align-items:center; justify-content:center; font-weight:700; font-size:13px; }
+  .badge { padding:3px 10px; border-radius:999px; font-size:12px; font-weight:700; color:#0b1020; }
+  [data-theme="light"] .badge { color:#fff; }
   .badge.crit { background:var(--crit); }
   .badge.major { background:var(--major); }
   .badge.minor { background:var(--minor); }
   .clause { margin:0; font-size:16px; }
-  .summary { margin:10px 0 12px; padding:10px 12px; background:#f8f9fb; border-radius:8px; font-weight:600; }
+  .summary { margin:10px 0 12px; padding:10px 12px; background:var(--soft); border-radius:8px; font-weight:600; }
   .diff { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   .col { border-radius:8px; overflow:hidden; border:1px solid var(--line); }
   .col-label { padding:6px 12px; font-size:12px; font-weight:700; letter-spacing:.02em; }
   .col-body { padding:12px; white-space:normal; }
   .col.old { background:var(--old); color:var(--old-ink); }
-  .col.old .col-label { background:#ffe88a; }
+  .col.old .col-label { background:var(--old-head); }
   .col.new { background:var(--new); color:var(--new-ink); }
-  .col.new .col-label { background:#f4b8b8; }
+  .col.new .col-label { background:var(--new-head); }
   .meta { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:12px; margin-top:12px; }
-  .meta-item { background:#fafafa; border:1px solid var(--line); border-radius:8px; padding:10px 12px; font-size:13px; }
+  .meta-item { background:var(--soft2); border:1px solid var(--line); border-radius:8px; padding:10px 12px; font-size:13px; }
   .meta-label { font-size:12px; font-weight:700; color:var(--muted); margin-bottom:4px; }
   .links a { display:block; font-size:12.5px; }
-  .ref { margin-top:12px; border-left:3px solid #c9ced6; padding:8px 12px; background:#fcfcfd; font-size:13px; }
-  .ref-body { color:#374151; }
+  .ref { margin-top:12px; border-left:3px solid var(--line); padding:8px 12px; background:var(--soft); font-size:13px; }
+  .ref-body { color:var(--ink); opacity:.85; }
   .muted { color:var(--muted); }
   footer { margin-top:30px; color:var(--muted); font-size:12.5px; }
   @media (max-width: 820px) { .diff, .meta { grid-template-columns:1fr; } }
-  @media print { body { background:#fff; } .card { break-inside:avoid; } .btn { border:1px solid #999; } }
+  @media print { :root { --bg:#fff; --card:#fff; --ink:#1f2328; --muted:#6b7280; --line:#ddd; --soft:#f8f9fb; --soft2:#fafafa; --old:#fff3b0; --old-ink:#5b4a00; --old-head:#ffe88a; --new:#f9d0d0; --new-ink:#5a1414; --new-head:#f4b8b8; --link:#1a56db; } .card { break-inside:avoid; } .theme-btn { display:none; } }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="top">
-    <h1>뷰티블라썸의원 × 인플루언서 계약서 수정 제안</h1>
-    <p class="sub">검토일 2026-10-26 · 대상: 시술 협찬 콘텐츠 제작 및 게시 계약서(KR 양식) · 총 14건</p>
+    <div class="top-row">
+      <div>
+        <h1>뷰티블라썸의원 × 인플루언서 계약서 수정 제안</h1>
+        <p class="sub">검토일 2026-10-26 · 대상: 시술 협찬 콘텐츠 제작 및 게시 계약서(KR 양식) · 총 14건</p>
+      </div>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="테마 전환">☀️ 라이트 모드</button>
+    </div>
     <div class="btns">
       <a class="btn primary" href="https://docs.google.com/document/d/1aasnCP7s05q6hBBEMt0H6z2-xGcaLcqkrC92IvUHjsk/edit?tab=t.0" target="_blank" rel="noopener">📄 수정 계약서 구글 문서 바로가기</a>
       <a class="btn" href="contract_revised.docx" download>⬇ 수정 계약서 DOCX 다운로드</a>
@@ -341,5 +363,20 @@
 </article></section>
   <footer>법령 원문은 법제처 국가법령정보센터(law.go.kr), 판례는 같은 사이트의 판례 페이지를 링크했습니다. 변호사 검토본 참고 문구는 서울아이성형외과 체험단 계약서 3종(블로그·유튜브·엘스코)에서 발췌했습니다. · 생성 2026-10-26</footer>
 </div>
+<script>
+(function() {
+  var root = document.documentElement, btn = document.getElementById('themeBtn');
+  function apply(t) {
+    if (t === 'light') { root.setAttribute('data-theme', 'light'); btn.textContent = '🌙 다크 모드'; }
+    else { root.removeAttribute('data-theme'); btn.textContent = '☀️ 라이트 모드'; }
+  }
+  var saved = null; try { saved = localStorage.getItem('bb-theme'); } catch (e) {}
+  apply(saved === 'light' ? 'light' : 'dark');
+  btn.addEventListener('click', function() {
+    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    apply(next); try { localStorage.setItem('bb-theme', next); } catch (e) {}
+  });
+})();
+</script>
 </body>
 </html>
